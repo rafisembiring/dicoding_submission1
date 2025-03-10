@@ -39,12 +39,12 @@ submission/
    ```bash
    streamlit run dashboard/dashboard.py
    ```
-3. The dashboard will be available at `https://dicodingsubmission1-hxyjpjxrb2nvzdqicfk9aw.streamlit.app/`.
+3. The dashboard will be available at `https://dicodingsubmission1-bfnrugtecmrsjj8rhpu6kx.streamlit.app/`.
 
 ## Deployment
 The dashboard is deployed on Streamlit Cloud. You can access it using the following link:
 ```
-https://dicodingsubmission1-hxyjpjxrb2nvzdqicfk9aw.streamlit.app/
+https://dicodingsubmission1-bfnrugtecmrsjj8rhpu6kx.streamlit.app/
 ```
 
 ## License
