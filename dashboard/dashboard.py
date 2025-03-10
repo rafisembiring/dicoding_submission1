@@ -51,7 +51,7 @@ st.pyplot(fig)
 # Penyewaan per hari
 daily_rentals = day_df.groupby("weekday")["cnt"].mean()
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.barplot(x=daily_rentals.index, y=daily_rentals.values, palette="Coolwarm", ax=ax)
+sns.barplot(x=daily_rentals.index, y=daily_rentals.values, palette="coolwarm", ax=ax)
 plt.xlabel("Day of the Week")
 plt.ylabel("Average Rentals")
 plt.title("Rata-rata Penyewaan Sepeda per Hari")
