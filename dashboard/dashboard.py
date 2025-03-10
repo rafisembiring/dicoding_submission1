@@ -57,6 +57,15 @@ plt.ylabel("Average Rentals")
 plt.title("Rata-rata Penyewaan Sepeda per Hari")
 st.pyplot(fig)
 
+# Distribusi Penyewaan Sepeda Berdasarkan Musim
+st.subheader("Distribusi Penyewaan Sepeda Berdasarkan Musim")
+fig, ax = plt.subplots(figsize=(10, 5))
+sns.boxplot(x=day_df['season'], y=day_df['cnt'], palette='Set2', ax=ax)
+plt.xlabel("Season")
+plt.ylabel("Total Rentals")
+plt.title("Distribusi Penyewaan Sepeda Berdasarkan Musim")
+st.pyplot(fig)
+
 # Kesimpulan
 st.subheader("Kesimpulan")
 st.write("1. Penyewaan sepeda lebih tinggi pada musim tertentu dan dipengaruhi oleh cuaca.")
