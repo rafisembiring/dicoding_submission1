@@ -2,18 +2,26 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
-# Load dataset
-day_df = pd.read_csv(r"data\day.csv")
-hour_df = pd.read_csv(r"data\hour.csv")
+# Load dataset with universal path
+base_dir = os.path.dirname(__file__)
+day_df = pd.read_csv(os.path.join(base_dir, "../data/day.csv"))
+hour_df = pd.read_csv(os.path.join(base_dir, "../data/hour.csv"))
 
 # Sidebar Filters
 st.sidebar.header("Filter Data")
-selected_season = st.sidebar.multiselect("Pilih Musim", options=day_df["season"].unique(), default=day_df["season"].unique())
-selected_weather = st.sidebar.multiselect("Pilih Cuaca", options=day_df["weathersit"].unique(), default=day_df["weathersit"].unique())
+season_options = ["All"] + sorted(day_df["season"].unique().tolist())
+weather_options = ["All"] + sorted(day_df["weathersit"].unique().tolist())
+selected_season = st.sidebar.multiselect("Pilih Musim", options=season_options, default=["All"])
+selected_weather = st.sidebar.multiselect("Pilih Cuaca", options=weather_options, default=["All"])
 
 # Filter Data
-df_filtered = day_df[(day_df["season"].isin(selected_season)) & (day_df["weathersit"].isin(selected_weather))]
+filtered_df = day_df.copy()
+if "All" not in selected_season:
+    filtered_df = filtered_df[filtered_df["season"].isin(selected_season)]
+if "All" not in selected_weather:
+    filtered_df = filtered_df[filtered_df["weathersit"].isin(selected_weather)]
 
 # Title
 st.title("Bike Sharing Dashboard")
@@ -21,7 +29,7 @@ st.title("Bike Sharing Dashboard")
 # Tren Penyewaan Sepeda Berdasarkan Musim dan Cuaca
 st.subheader("Tren Penyewaan Sepeda Berdasarkan Musim dan Cuaca")
 fig, ax = plt.subplots(figsize=(10, 5))
-sns.barplot(x=df_filtered["season"], y=df_filtered["cnt"], hue=df_filtered["weathersit"], palette="Blues", ax=ax)
+sns.barplot(x=filtered_df["season"], y=filtered_df["cnt"], hue=filtered_df["weathersit"], palette="Blues", ax=ax)
 plt.xlabel("Season")
 plt.ylabel("Total Rentals")
 plt.title("Tren Penyewaan Sepeda Berdasarkan Musim dan Cuaca")
@@ -32,7 +40,7 @@ st.pyplot(fig)
 st.subheader("Jam dan Hari Paling Ramai untuk Penyewaan Sepeda")
 
 # Penyewaan per jam
-hourly_rentals = df_filtered.groupby("hr")["cnt"].mean()
+hourly_rentals = hour_df.groupby("hr")["cnt"].mean()
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.lineplot(x=hourly_rentals.index, y=hourly_rentals.values, marker='o', color='royalblue', ax=ax)
 plt.xlabel("Hour of the Day")
@@ -41,7 +49,7 @@ plt.title("Rata-rata Penyewaan Sepeda per Jam")
 st.pyplot(fig)
 
 # Penyewaan per hari
-daily_rentals = df_filtered.groupby("weekday")["cnt"].mean()
+daily_rentals = day_df.groupby("weekday")["cnt"].mean()
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x=daily_rentals.index, y=daily_rentals.values, palette="Oranges", ax=ax)
 plt.xlabel("Day of the Week")
