@@ -1,1 +1,1 @@
-`http://localhost:8501/`
+`https://dicodingsubmission1-hxyjpjxrb2nvzdqicfk9aw.streamlit.app/`
