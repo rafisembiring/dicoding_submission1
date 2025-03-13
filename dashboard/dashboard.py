@@ -72,4 +72,7 @@ st.write("1. Penyewaan sepeda lebih tinggi pada musim panas dan lebih rendah pad
 st.write("2. Cuaca buruk mengurangi jumlah penyewaan sepeda secara signifikan.")
 st.write("3. Penyewaan sepeda paling ramai terjadi pada jam sibuk pagi (07:00 - 09:00) dan sore (17:00 - 19:00).")
 st.write("4. Hari kerja memiliki jumlah penyewaan lebih tinggi dibandingkan akhir pekan.")
+
+# Rekomendasi
+st.subheader("Rekomendasi")
 st.write("5. Rekomendasi: Meningkatkan jumlah sepeda saat jam sibuk dan memberikan promosi di musim dingin.")
