@@ -68,8 +68,6 @@ st.pyplot(fig)
 
 # Kesimpulan
 st.subheader("Kesimpulan")
-st.write("1. Penyewaan sepeda lebih tinggi pada musim tertentu dan dipengaruhi oleh cuaca.")
-st.write("2. Jam sibuk (pagi dan sore) serta akhir pekan memiliki penyewaan tertinggi.")
 st.write("1. Penyewaan sepeda lebih tinggi pada musim panas dan lebih rendah pada musim dingin.")
 st.write("2. Cuaca buruk mengurangi jumlah penyewaan sepeda secara signifikan.")
 st.write("3. Penyewaan sepeda paling ramai terjadi pada jam sibuk pagi (07:00 - 09:00) dan sore (17:00 - 19:00).")
