@@ -26,37 +26,41 @@ if "All" not in selected_weather:
 # Title
 st.title("Bike Sharing Dashboard")
 
-# 1️⃣ Tren Penyewaan Sepeda Berdasarkan Musim dan Cuaca
+# Rata-rata Penyewaan Sepeda Berdasarkan Musim dan Cuaca
 st.subheader("Tren Penyewaan Sepeda Berdasarkan Musim dan Cuaca")
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x=day_df["season"], y=day_df["cnt"], hue=day_df["weathersit"], palette="Set2", ax=ax)
+plt.xticks(ticks=[0,1,2,3], labels=["Spring", "Summer", "Fall", "Winter"])
 plt.xlabel("Musim")
 plt.ylabel("Rata-rata Penyewaan Sepeda")
 plt.title("Tren Penyewaan Sepeda Berdasarkan Musim dan Cuaca")
-plt.legend(title="Kondisi Cuaca")
+plt.legend(title="Kondisi Cuaca", labels=["Cerah", "Mendung", "Hujan/Salju Ringan", "Hujan Deras"])
 st.pyplot(fig)
 
-# 2️⃣ Penyewaan per jam
+# Tren Penyewaan Sepeda Berdasarkan Jam
 st.subheader("Rata-rata Penyewaan Sepeda per Jam")
 hourly_rentals = hour_df.groupby("hr")["cnt"].mean()
-fig, ax = plt.subplots(figsize=(10, 5))
-sns.lineplot(x=hourly_rentals.index, y=hourly_rentals.values, marker='o', color='royalblue', ax=ax)
+fig, ax = plt.subplots(figsize=(12, 6))
+sns.lineplot(x=hourly_rentals.index, y=hourly_rentals.values, marker='o', color='blue', ax=ax)
 plt.xlabel("Jam dalam Sehari")
 plt.ylabel("Rata-rata Penyewaan Sepeda")
 plt.title("Rata-rata Penyewaan Sepeda per Jam")
+plt.xticks(ticks=range(0, 24))
+plt.grid()
 st.pyplot(fig)
 
-# 3️⃣ Penyewaan per hari
+# Tren Penyewaan Sepeda Berdasarkan Hari
 st.subheader("Rata-rata Penyewaan Sepeda per Hari")
 daily_rentals = day_df.groupby("weekday")["cnt"].mean()
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x=daily_rentals.index, y=daily_rentals.values, palette="coolwarm", ax=ax)
+plt.xticks(ticks=range(7), labels=["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"])
 plt.xlabel("Hari dalam Seminggu")
 plt.ylabel("Rata-rata Penyewaan Sepeda")
 plt.title("Rata-rata Penyewaan Sepeda per Hari")
 st.pyplot(fig)
 
-# 4️⃣ Distribusi Penyewaan Sepeda Berdasarkan Musim
+# Tren Distribusi Penyewaan Sepeda Berdasarkan Musim
 st.subheader("Distribusi Penyewaan Sepeda Berdasarkan Musim")
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.boxplot(x=day_df['season'], y=day_df['cnt'], palette='Set2', ax=ax)
